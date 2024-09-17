@@ -1,8 +1,61 @@
-<h1>The Goods Place</h1>
+{% extends 'base.html' %}
+{% block content %}
 
-<h5>Application: </h5>
-<p>{{ application }}</p>
-<h5>Name: </h5>
-<p>{{ name }}</p>
-<h5>Class: </h5>
-<p>{{ class }}</p>
+<div style="text-align: center;">
+    <h1 style = "margin-bottom: 0;">{{ application }}.</h1>
+    <p style = "margin-top: 0;"> where your wonderland of hugs awaits ⸜(｡˃ ᵕ ˂ )⸝♡</p>
+</div>
+
+{% if not product_entries %}
+<div style="text-align: center;"></div>
+    <p style = "margin-bottom: 0;">Tidak menemukan produk apapun dalam {{ application }}.</p>
+    <p style = "margin-top: 0;">/ᐠ - ˕ -マ Ⳋ</p>
+</div>
+{% else %}
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product_entry in product_entries %}
+            <tr>
+                <td>{{ product_entry.name }}</td>
+                <td>{{ product_entry.price }}</td>
+                <td>{{ product_entry.description }}</td>
+                <td>{{ product_entry.quantity }}</td>
+                <td>
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= product_entry.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                    ({{ product_entry.rating }})
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<div style="text-align: center; margin-top: 40px;">
+    <a href="{% url 'main:create_product_entry' %}">
+        <button style="padding: 10px 20px; font-size: 16px; margin-bottom: 20px;">Create New Product</button>
+    </a>
+</div>
+
+<div style="text-align: center; margin-bottom: 50px;">
+    <p style="margin-bottom: 0;"><small>  + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + </small></p>
+    <p style="margin-top: 0;"><small> created by yours truly, {{ name }} from {{ class }}</small></p>
+</div>
+
+{% endblock content %}

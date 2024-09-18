@@ -50,3 +50,45 @@ Framework Django dijadikan permulaan dalam pembelajaran pengembangan perangkat l
 
 # Mengapa model pada Django disebut sebagai ORM?
 Model pada Django disebut sebagai Object-Relational Mapping (ORM) karena memiliki peran dalam memetakan objek dalam kode Python ke dalam tabel pada struktur database regional tanpa perlu melibatkan query SQL secara langsung.
+
+# Tugas 3: Implementasi Form dan Data Delivery pada Django
+## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+Dalam pengimplementasian sebuah platform, data delivery diperlukan sebagai proses transfer data secara efektif, efisien, dan terpercaya dari satu titik ke titik lainnya, baik antara sistem, perangkat, maupun pengguna.
+1. Data delivery memastikan informasi yang diperlukan pengguna ataupun sistem dapat diakses secara cepat dan efisien untuk menjaga platform beroperasi dengan lancar.
+2. Data delivery melibatkan enkripsi serta mekanisme keamanan lainnya yang dilakukan dengan aman untuk mencegah baik kebocoran maupun akses data secara tidak sah.
+3. Data delivery memastikan data dapat ditransfer dan diterima antar sistem secara efektif dan efisien sehingga menciptakan platform dengan integrasi yang lancar.
+
+## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya pribadi, JSON lebih baik daripada XML. Formatnya yang lebih ringan dan sederhana membuat JSON menjadi lebih banyak digunakan, terutama dalam pengembangan website.
+1. JSON menggunakan lebih sedikit teks karena tidak memerlukan declaration awal seperti XML, sehingga lebih hemat bandwidth saat mengirimkan data.
+2. JSON diproses lebih cepat, karena langsung terintegrasi dengan JavaScript, dan lebih ringan dibandingan XML, yang memerlukan proses parsing lebih kompeks.
+3. JSON memiliki struktur yang lebih sederhana dan format objek yang mirip dengan JavaScript, sehingga memudahkan user dalam memahami serta menulis kode.
+
+## Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?
+Dalam Django, method is_valid() merupakan function yang digunakan untuk memvalidasi dan menjaga keamanan data yang diinput ke dalam form.
+1. Method is_valid() secara otomatis akan memeriksa setiap field dalam form untuk memeriksa bahwa data yang diberikan sudah benar dan sesuai dengan spesifikasi yang diharapkan.
+2. Jika semua data valid, method akan mengembalikan nilai True dan menyimpan data yang sudah divalidasi tersebut. Ini membantu dalam mengelola kesalahan dengan menampilkan pesan error, sehingga dapat mengurasi risiko keamanan yang dapat muncul dari data tidak valid. 
+
+## Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+csrf_token dibutuhkan ketika membuat form di Django dengan tujuan untuk melindungi aplikasi dari serangan Cross-Site Request Forgery (CSRF). Serangan CSRF merupakan jenis serangan dimana penyerang dapat memanipulasi user yang telah login ke situs untuk mengirimkan permintaan yang tidak sah ke server (seperti mengubah data pengguna, menyebarkan malware, dan/atau melakukan transaksi tidak legal), tanpa diketahui atau disetujui oleh pengguna tersebut. Tanpa crsf_token, website Django akan menjadi rentan terhadap serangan CSRF sehingga dapat menyebabkan kerugian serius baik bagi pengguna maupun bagi sistem.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.
+1. **Membuat input `form` untuk menambahkan objek model pada app sebelumnya**
+Pertama, saya membuat berkas baru dengan nama forms.py dalam direktori main untuk menyimpan struktur form yang akan menerima data tersebut. Kemudian, dalam berkas views.py, ditambahkan beberapa import dari main.forms dengan tujuan untuk memanggil forms ketika dibuka. Setelah itu, saya menambahkan fuction baru create_product_entry dengan menggunakan form.is_valid() dengan tujuan untuk memvalidasi isi input tersebut. Selanjutnya, saya melakukan routing URL dengan mengimport fuction create_product_entry ke urls.py. Pada template HTML, ditambahkan <form method="POST> untuk menandai block form yang menggunakan method POST, {% csrf_token %} untuk mencegah serangan CSRF, serta button Submit untuk mengirimkan request ke view.
+2. **Menambahkan 4 fungsi `views` baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID**
+Kedua, saya menambahkan import HttpResoibse dan Serializer pada berkas views.py. Kemudian, saya membuat fuction show_xml, show_json, show_xml_by_id, dan show_json_by_id yang akan melakukan return HttpResponse menyesuaikan dengan format yang digunakan.
+3. **Membuat routing URL untuk masing-masing `views` yang telah ditambahkan sebelumnya**
+Ketiga, pada berkas urls.py, saya mengimport keempat function tersebut, lalu menambahkan path URL pada urlpatterns dengan formatnya masing-masing. Dengan demikian, proyek Django dapat dijalankan dengan perintah python manage.py runserver dan membuka link website sesuai dengan ketentaun format masing-masing.
+
+## Dokumentasi Postman
+1. **Membuka XML dengan show_xml**
+<img src = "./images/show_xml.jpg" width = "800" height = "603">
+
+2. **Membuka JSON dengan show_json**
+<img src = "./images/show_json.jpg" width = "800" height = "603">
+
+3. **Membuka XML dengan show_xml_by_id**
+<img src = "./images/show_xml_by_id.jpg" width = "800" height = "603">
+
+4. **Membuka JSON dengan show_json_by_id**
+<img src = "./images/show_json_by_id.jpg" width = "800" height = "603">

@@ -82,13 +82,13 @@ Ketiga, pada berkas urls.py, saya mengimport keempat function tersebut, lalu men
 
 ## Dokumentasi Postman
 1. **Membuka XML dengan show_xml**
-<img src = "./images/show_xml.jpg" width = "800" height = "603">
+<img src = "./images/show_xml.jpg" width = "800" height = "600">
 
 2. **Membuka JSON dengan show_json**
-<img src = "./images/show_json.jpg" width = "800" height = "603">
+<img src = "./images/show_json.jpg" width = "800" height = "600">
 
 3. **Membuka XML dengan show_xml_by_id**
-<img src = "./images/show_xml_by_id.jpg" width = "800" height = "1200">
+<img src = "./images/show_xml_by_id.jpg" width = "800" height = "600">
 
 4. **Membuka JSON dengan show_json_by_id**
-<img src = "./images/show_json_by_id.jpg" width = "800" height = "603">
+<img src = "./images/show_json_by_id.jpg" width = "800" height = "600">

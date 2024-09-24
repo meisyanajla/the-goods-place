@@ -2,13 +2,14 @@
 {% block content %}
 
 <div style="text-align: center;">
-    <h1 style = "margin-bottom: 0;">{{ application }}.</h1>
-    <p style = "margin-top: 0;"> where your wonderland of hugs awaits ⸜(｡˃ ᵕ ˂ )⸝♡</p>
+    <p style = "margin-bottom: 0;">{{  name  }}, you've arrived at</p>
+    <h1 style = "margin-top: 0;">{{  application  }}.</h1>
 </div>
 
 {% if not product_entries %}
 <div style="text-align: center;">
-    <p style = "margin-bottom: 0;">Tidak menemukan produk apapun dalam {{ application }}.</p>
+    <br>
+    <p style = "margin-top: 5px; margin-bottom: 0;">Unable to find any products in {{ application }}.</p>
     <p style = "margin-top: 0;">/ᐠ - ˕ -マ Ⳋ</p>
 </div>
 {% else %}
@@ -53,14 +54,15 @@
     </a>
 </div>
 
-<div style="text-align: center; margin-bottom: 50px;">
+<div style="text-align: center; margin-bottom: 20px;">
     <p style="margin-bottom: 0;"><small>  + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + </small></p>
-    <p style="margin-top: 0;"><small> created by yours truly, {{ name }} from {{ class }}</small></p>
+    <p style="margin-top: 0;"><small> created by yours truly, Meisya Najla Aqilah from {{ class }}</small></p>
 </div>
 
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
+<div style="text-align: right; margin-top: 0;">
+    <a href="{% url 'main:logout' %}">
+        <button style="padding: 10px 20px; font-size: 16px;">Logout</button>
+    </a>
+    <h5 style="margin-top: 0.5em;">last login: {{ last_login }}</h5>
+</div>
 {% endblock content %}

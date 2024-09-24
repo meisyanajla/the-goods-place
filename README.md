@@ -73,22 +73,22 @@ Dalam Django, method is_valid() merupakan function yang digunakan untuk memvalid
 csrf_token dibutuhkan ketika membuat form di Django dengan tujuan untuk melindungi aplikasi dari serangan Cross-Site Request Forgery (CSRF). Serangan CSRF merupakan jenis serangan dimana penyerang dapat memanipulasi user yang telah login ke situs untuk mengirimkan permintaan yang tidak sah ke server (seperti mengubah data pengguna, menyebarkan malware, dan/atau melakukan transaksi tidak legal), tanpa diketahui atau disetujui oleh pengguna tersebut. Tanpa crsf_token, website Django akan menjadi rentan terhadap serangan CSRF sehingga dapat menyebabkan kerugian serius baik bagi pengguna maupun bagi sistem.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.
-1. **Membuat input `form` untuk menambahkan objek model pada app sebelumnya**
+1. **Membuat input `form` untuk menambahkan objek model pada app sebelumnya** <br />
 Pertama, saya membuat berkas baru dengan nama forms.py dalam direktori main untuk menyimpan struktur form yang akan menerima data tersebut. Kemudian, dalam berkas views.py, ditambahkan beberapa import dari main.forms dengan tujuan untuk memanggil forms ketika dibuka. Setelah itu, saya menambahkan fuction baru create_product_entry dengan menggunakan form.is_valid() dengan tujuan untuk memvalidasi isi input tersebut. Selanjutnya, saya melakukan routing URL dengan mengimport fuction create_product_entry ke urls.py. Pada template HTML, ditambahkan <form method="POST> untuk menandai block form yang menggunakan method POST, {% csrf_token %} untuk mencegah serangan CSRF, serta button Submit untuk mengirimkan request ke view.
-2. **Menambahkan 4 fungsi `views` baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID**
+2. **Menambahkan 4 fungsi `views` baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID** <br />
 Kedua, saya menambahkan import HttpResoibse dan Serializer pada berkas views.py. Kemudian, saya membuat fuction show_xml, show_json, show_xml_by_id, dan show_json_by_id yang akan melakukan return HttpResponse menyesuaikan dengan format yang digunakan.
-3. **Membuat routing URL untuk masing-masing `views` yang telah ditambahkan sebelumnya**
+3. **Membuat routing URL untuk masing-masing `views` yang telah ditambahkan sebelumnya** <br />
 Ketiga, pada berkas urls.py, saya mengimport keempat function tersebut, lalu menambahkan path URL pada urlpatterns dengan formatnya masing-masing. Dengan demikian, proyek Django dapat dijalankan dengan perintah python manage.py runserver dan membuka link website sesuai dengan ketentaun format masing-masing.
 
 ## Dokumentasi Postman
 1. **Membuka XML dengan show_xml**
-<img src = "./images/show_xml.jpg" width = "800" height = "603">
+<img src = "./images/show_xml.jpg" width = "800" height = "600">
 
 2. **Membuka JSON dengan show_json**
-<img src = "./images/show_json.jpg" width = "800" height = "603">
+<img src = "./images/show_json.jpg" width = "800" height = "600">
 
 3. **Membuka XML dengan show_xml_by_id**
-<img src = "./images/show_xml_by_id.jpg" width = "800" height = "603">
+<img src = "./images/show_xml_by_id.jpg" width = "800" height = "600">
 
 4. **Membuka JSON dengan show_json_by_id**
-<img src = "./images/show_json_by_id.jpg" width = "800" height = "603">
+<img src = "./images/show_json_by_id.jpg" width = "800" height = "600">

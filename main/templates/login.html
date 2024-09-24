@@ -7,13 +7,13 @@
 {% block content %}
 <div class="login">
     <div style="text-align: center;">
-        <p style = "margin-bottom: 0;">you've arrived at</p>
-        <h1 style = "margin-top: 0;">The Goods Place</h1>
+        <h1 style = "margin-bottom: 0;">The Goods Place.</h1>
+    <p style = "margin-top: 0;"> where your wonderland of hugs awaits ⸜(｡˃ ᵕ ˂ )⸝♡</p>
     </div>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <div class="table-container" style="margin: 0 auto; width: 250;">
+        <div class="table-container" style="margin: 0 auto; width: 200;">
             <table>
                 {{ form.as_table }}
                 <tr>
@@ -26,16 +26,18 @@
     </form>
 
     {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <div style="text-align: center; margin-top: 20px;">
+        <ul style="list-style: none; padding: 0;">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
     
-    <div style="text-align: center; margin-top: 20px;">
-        Don't have an account yet?
-        <a href="{% url 'main:register' %}">Register Now</a>
+    <div style="text-align: center; margin-top: 20px; font-size: 16px;">
+        Want to join our adventure?
+        <a href="{% url 'main:register' %}">start here!</a>
     </div>
 </div>
 

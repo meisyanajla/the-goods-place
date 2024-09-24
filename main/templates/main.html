@@ -58,4 +58,9 @@
     <p style="margin-top: 0;"><small> created by yours truly, {{ name }} from {{ class }}</small></p>
 </div>
 
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
 {% endblock content %}

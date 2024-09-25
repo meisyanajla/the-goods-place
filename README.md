@@ -106,16 +106,19 @@ Penghubungan model Product dengan model User dalam Django dapat dilakukan menggu
 ## Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 Perbedaan antara authentication dan authorization terletak pada fokus prosesnya, dimana:
 1. Autentikasi, yaitu proses verifikasi identitas pengguna dengan meminta informasi, seperti username dan password, untuk memastikan bahwa pengguna yang mencoba masuk adalah benar.
-2. Autorisasi, merupakan proses di mana sistem menentukan apakah pengguna yang telah terautentikasi mendapatkan hak atau izin untuk mengakses data atau melakukan tindakan tertentu dalam sistem. <br />
+2. Autorisasi, merupakan proses di mana sistem menentukan apakah pengguna yang telah terautentikasi mendapatkan hak atau izin untuk mengakses data atau melakukan tindakan tertentu dalam sistem.
+
 Django mengimplementasi konsep autentikasi dan autorisasi melalui modul bawaan django.contrib.auth, yang menyediakan sistem untuk mengelola informasi login, logout, dan pengelolaan sistem. Untuk autentikasi, Django menggunakan fungsi seperti authenticate() untuk memverifikasi username dan password serta login() untuk memulai sesi jika autentikasi berhasil. Sementara itu, untuk autorisasi, Django memungkinkan sistem untuk mengontrol tindakan yang dilakukan pengguna yang telah terautentikasi melalui decorator seperti @permission_required atau metode user.has_perm().
 
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 Django dapat mengingat pengguna yang telah login, dengan membuat sesi yang menyimpan informasi pengguna dalam bentuk ID, serta mengidentifikasi sesi pengguna menggunakan cookies.
 1. Ketika pengguna login, Django membuat entri baru dalam database untuk sesi tersebut (ID pengguna dan data lainnya). Database tersebut disimpan dalam cookies yang akan dikirim ke browser pengguna.
-2. Ketika pengguna mengakses aplikasi, cookies yang menyimpan ID sesi akan mengirimkan ID tersebut kembali ke server untuk mengidentifikasi sesi pengguna yang sedang aktif. <br />
+2. Ketika pengguna mengakses aplikasi, cookies yang menyimpan ID sesi akan mengirimkan ID tersebut kembali ke server untuk mengidentifikasi sesi pengguna yang sedang aktif.
+
 Selain untuk menyimpan ID sesi, cookies memiliki berbagai kegunaan seperti melacak dan menganalisis user behaviour serta personalisasi konten website.
 1. Cookies berfungsi untuk memantau aktivitas pengguna di website dengan mengumpulkan informasi tentang perilaku pengguna untuk membantu pemilik website dalam menganalisis pola perilaku dan meningkatkan konten serta strategi pemasaran.
-2. Cookies memungkinkan website untuk menyimpan preferensi pengguna seperti pilihan bahasa, tema, dan pengaturan tampilan untuk membantu menciptakan pengalaman pengguna yang lebih sesuai dengan kebutuhan dan keinginan mereka. <br />
+2. Cookies memungkinkan website untuk menyimpan preferensi pengguna seperti pilihan bahasa, tema, dan pengaturan tampilan untuk membantu menciptakan pengalaman pengguna yang lebih sesuai dengan kebutuhan dan keinginan mereka.
+
 Namun, tingkat keamanan cookies bergantung pada bagaimana cookies tersebut diimplementasikan. Untuk memastikan pengunaan cookies aman, Django menyediakan atribut HttpOnly dan Secure, yang dapat melindungi data pengguna dari potensi risiko keamanan. Atribut HttpOnly mencegah cookies diakses oleh kode JavaScript sehingga hanya dapat dimodifikasi oleh server melalui protokol HTTP/HTTPS. Sementara itu, atribut Secure memastikan bahwa cookies hanya dikirim melalui koneksi HTTPS yang terenkripsi.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.

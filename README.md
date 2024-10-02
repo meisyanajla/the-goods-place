@@ -1,3 +1,32 @@
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Tugas 2: Implementasi Model-View-Template (MVT) pada Django](#tugas-2-implementasi-model-view-template-mvt-pada-django)
+- [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step)
+- [Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.](#buatlah-bagan-yang-berisi-request-client-ke-web-aplikasi-berbasis-django-beserta-responnya-dan-jelaskan-pada-bagan-tersebut-kaitan-antara-urlspy-viewspy-modelspy-dan-berkas-html)
+- [Jelaskan fungsi git dalam pengembangan perangkat lunak!](#jelaskan-fungsi-git-dalam-pengembangan-perangkat-lunak)
+- [Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?](#menurut-anda-dari-semua-framework-yang-ada-mengapa-framework-django-dijadikan-permulaan-pembelajaran-pengembangan-perangkat-lunak)
+- [Mengapa model pada Django disebut sebagai ORM?](#mengapa-model-pada-django-disebut-sebagai-orm)
+- [Tugas 3: Implementasi Form dan Data Delivery pada Django](#tugas-3-implementasi-form-dan-data-delivery-pada-django)
+  - [Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?](#jelaskan-mengapa-kita-memerlukan-data-delivery-dalam-pengimplementasian-sebuah-platform)
+  - [Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?](#menurutmu-mana-yang-lebih-baik-antara-xml-dan-json-mengapa-json-lebih-populer-dibandingkan-xml)
+  - [Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?](#jelaskan-fungsi-dari-method-is_valid-pada-form-django-dan-mengapa-kita-membutuhkan-method-tersebut)
+  - [Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?](#mengapa-kita-membutuhkan-csrf_token-saat-membuat-form-di-django-apa-yang-dapat-terjadi-jika-kita-tidak-menambahkan-csrf_token-pada-form-django-bagaimana-hal-tersebut-dapat-dimanfaatkan-oleh-penyerang)
+  - [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step-1)
+  - [Dokumentasi Postman](#dokumentasi-postman)
+- [Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django](#tugas-4-implementasi-autentikasi-session-dan-cookies-pada-django)
+  - [Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`?](#apa-perbedaan-antara-httpresponseredirect-dan-redirect)
+  - [Jelaskan cara kerja penghubungan model `Product` dengan `User`!](#jelaskan-cara-kerja-penghubungan-model-product-dengan-user)
+  - [Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.](#apa-perbedaan-antara-authentication-dan-authorization-apakah-yang-dilakukan-saat-pengguna-login-jelaskan-bagaimana-django-mengimplementasikan-kedua-konsep-tersebut)
+  - [Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?](#bagaimana-django-mengingat-pengguna-yang-telah-login-jelaskan-kegunaan-lain-dari-cookies-dan-apakah-semua-cookies-aman-digunakan)
+  - [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step-2)
+- [Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS](#tugas-5-desain-web-menggunakan-html-css-dan-framework-css)
+  - [Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!](#jika-terdapat-beberapa-css-selector-untuk-suatu-elemen-html-jelaskan-urutan-prioritas-pengambilan-css-selector-tersebut)
+  - [Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!](#mengapa-responsive-design-menjadi-konsep-yang-penting-dalam-pengembangan-aplikasi-web-berikan-contoh-aplikasi-yang-sudah-dan-belum-menerapkan-responsive-design)
+  - [Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!](#jelaskan-perbedaan-antara-margin-border-dan-padding-serta-cara-untuk-mengimplementasikan-ketiga-hal-tersebut)
+  - [Jelaskan konsep flex box dan grid layout beserta kegunaannya!](#jelaskan-konsep-flex-box-dan-grid-layout-beserta-kegunaannya)
+  - [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step-3)
+
+
 # Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 **Nama**: Meisya Najla Aqilah
 
@@ -128,3 +157,36 @@ Pertama, virtual environment diaktifkan pada terminal. Setelah itu, melakukan im
 Pertama, saya mengimport model User pada models.py dan menambahkan models.ForeignKey(User, on_delete=models.CASCADE) dalam class ProductEntry agar product entry terhubung hanya dengan satu orang. Kemudian, pada views.py, saya menambahkan form.save(commit=False) serta request.user pada fungsi create_product_entry. Selain itu, saya juga menambahkan ProductEntry.objects.filter(user=request.user) pada fungsi show_main di berkas yang sama. Karena saya telah mengubah models.py, saya perlu melakukan migrasi model dengan python manage.py makemigration dan python manage.py migrate. Terakhir, pada settings.py, saya melakukan import os, lalu mengganti variabel DEBUG serta menambahkan variabel PRODUCTION.
 3. **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan `cookies` seperti `last login` pada halaman utama aplikasi** <br />
 Pertama, saya melakukan import datetime, HttpResponseRedirect, dan reverse pada berkas views.py. Setelah itu, saya mengubah pernyataan if form.is_valid menjadi HttpResponseRedirect(reverse("main:show_main")) dan melakukan set_cookie berdasarkan last login dan datetime. Kemudian, saya nembahkan last_login dengan request.COOKIES[‘last_login’] pada context yang berada pada fungsi show_main. Selain itu, saya juga menambahkan HttpResponseRedirect pada fungsi logout_user untuk menghapus cookies last_login saat pengguna logout. Terakhir, untuk menampilkan last login tersebut, saya menambahkannya pada berkas main.html.
+
+# Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+CSS selector memiliki urutan prioritas pengambilan dimulai dari inline styles, ID selectors, class selectors, attribute selectors, dan terakhir element selectors.
+1. Inline styles memiliki prioritas tertinggi karena style tersebut ditetapkan langsung dalam atribut style pada elemen HTML.
+2. ID Selector, yang ditandai dengan simbol pagar, memiliki prioritas lebih tinggi karena ID telah dirancang untuk bersifat unik dalam sebuah dokumen dengan tujuan memberikan kontrol yang lebih tepat dalam penataan elemen individual.
+3. Class Selector, yang diidentifikasikan dengan simbol titik, memiliki prioritas lebih tinggi karena dirancang untuk menerapkan gaya pada sekelompok elemen, memberikan kontrol yang lebih luas terhadap styling.
+4. Attribute Selector memiliki prioritas lebih rendah karena berlaku berdasarkan keberadaan atribut tertentu pada elemen, sehingga spesifisitasnya tidak sekuat kelas.
+5. Element Selector memiliki prioritas terendah karena hanya berlaku pada tipe elemen tertentu dan tidak memberikan kontrol spesifik yang sama seperti selector lainnya.
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Menurut saya, responsive design merupakan konsep yang sangat penting dalam pengembangan aplikasi website karena meningkatkan pengalaman pengguna dengan menyesuaikan interface sesuai dengan berbagai ukuran layar, serta meningkatkan aksesibilitas bagi lebih banyak orang. Dengan semakin banyaknya penggunaan perangkat mobile untuk menjelajah internet, responsive design menjadi semakin penting untuk menjangkau audiens yang lebih luas. Sebagai contoh, https://twitter.com dan https://pinterest.com telah menerapkan responsive design untuk memastikan bahwa pengguna dapat mengakses konten mereka dengan mudah di berbagai perangkat. Namun, di sisi lain, https://academic.ui.ac.id belum menerapkan responsive design, yang mengakibatkan tampilan dan navigasi yang kurang optimal saat diakses melalui perangkat mobile.
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+Secara garis besar, margin, border, dan padding merupakan elemen dari box model dalam CSS yang digunakan untuk menentukan tata letak elemen pada halaman web.
+1. Margin merupakan ruang kosong di luar batas elemen yang berfungsi mengatur jarak antar elemen pada halaman web. Dalam mengimplementasikannya, margin dapat diatur untuk semua sisi (atas, kanan, bawah, kiri) atau untuk sisi tertentu saja.
+2. Border merupakan garis yang mengelilingi elemen, terletak di antara margin dan padding, dan dapat disesuaikan ketebalan, gaya, serta warnanya. Dalam mengimplementasikannya, border dapat diatur untuk setiap sisi secara terpisah atau sekaligus untuk semua sisi.
+3. Padding merupakan ruang kosong di dalam elemen yang memisahkan konten dari batas elemen dan memberi jarak antara isi elemen dengan tepinya.  Dalam mengimplementasikannya, padding dapat diterapkan secara merata pada semua sisi elemen atau diatur secara khusus untuk tiap sisi atas, bawah, kanan, dan kiri.
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+Dalam CSS, flexbox merupakan metode tata letak satu dimensi untuk mengatur elemen secara fleksibel dalam satu arah. Sementara itu, grid layout adalah metode tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom secara bersamaan.
+1. Konsep flexbox memudahkan distribusi ruang dan perataan elemen, terutama dalam konteks ukuran layar yang berbeda-beda. Kegunaan Flexbox terletak pada kemampuannya untuk menciptakan tata letak yang fleksibel dan responsif, seperti navbar dan galeri gambar, dengan perataan elemen yang mudah.
+2. Konsep grid layout memungkinkan pembagian halaman menjadi baris dan kolom. Kegunaan Grid Layout terletak pada kemampuannya untuk menciptakan tata letak kompleks dan terstruktur, seperti halaman web dengan header, footer, sidebar, dan konten utama.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.
+1. **Implementasikan fungsi untuk mengedit product** <br />
+Pertama, saya membuat fungsi baru dengan nama edit_product dengan parameter request dan id pada berkas views.py serta menambahkan import reverse dari django.shortcuts dan juga import HttpResponseRedirect dari django.http. Kemudian, saya membuat berkas baru dengan nama edit_product.html yang akan menjadi windows ketika melakukan edit product. Setelah itu, pada berkas urls.py, saya melakukan import edit_product dengan menambahkan path url ke dalam urlpatterns. Terakhir, pada berkas main.html, saya membuat button yang menghubungkan windows utama ke windows edit_product.
+2. **Implementasikan fungsi untuk menghapus product** <br />
+Pertama, pada berkas views.py, saya membuat fungsi baru dengan nama delete_product dengan parameter request serta id. Selanjutnya, saya melakukan import delete_product pada berkas urls.py serta menambahkan path urlnya ke dalam urlpatterns. Terakhir, saya membuat button yang akan menghapus product yang telah dibuat sebelumnya pada berkas main.html
+3. **Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma)** <br />
+Pertama, saya menambahkan script dengan source website tailwind (karena saya menggunakan tailwind) pada berkas base.html. Kemudian, untuk menambahkan kelas custom, saya membuat berkas global.css pada folder static/css agar dapat menjalankan CSS. Selanjutnya, pada global.css, saya memodifikasi file berdasarkan format yang saya inginkan. Terakhir, saya melakukan styling pada halaman login, register, home, create product entry, dan juga edit product agar sesuai dengan UI yang saya harapkan.
+4. **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.** <br />
+Pertama, pada templates, saya membuat berkas navbar.html yang berisikan styling navbar dengan fitur home, create, favorites, cart, user, dan logout button. Selanjutnya, pada main.html, create_product_entry.html, dan edit_product.html saya menambahkan {% include 'navbar.html' %} agar program dapat melakukan load navigation bar tersebut.

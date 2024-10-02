@@ -1,0 +1,39 @@
+<div class="relative break-inside-avoid bg-white shadow-lg rounded-lg p-6" style="font-family: 'Helvetica', sans-serif;">
+    <div class="mb-4 flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800">{{ product_entry.name }}</h3>
+        <p class="text-2xl font-bold text-gray-700">Rp{{ product_entry.price }}</p>
+    </div>
+  
+    <div class="text-gray-600 mb-4">
+        <p>{{ product_entry.description }}</p>
+    </div>
+  
+    <div class="flex justify-between items-center mb-4">
+        <div>
+          <p class="font-medium text-gray-900 mb-1">Quantity Available</p>
+          <p>{{ product_entry.quantity }} pieces</p>
+        </div>
+        <div class="text-yellow-500">
+          <p class="font-medium text-gray-900 mb-1">Rating</p>
+          <p>
+            {% for i in "12345" %}
+              {% if forloop.counter <= product_entry.rating %}
+                ★
+              {% else %}
+                ☆
+              {% endif %}
+            {% endfor %}
+            ({{ product_entry.rating }})
+          </p>
+        </div>
+      </div>
+  
+    <div class="flex justify-center space-x-3 mt-4">
+        <a href="{% url 'main:edit_product' product_entries.0.pk %}" class="bg-[#7EACB5] hover:bg-[#7EACB5] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            Edit
+        </a>
+        <a href="{% url 'main:delete_product' product_entries.0.pk %}" class="bg-[#C96868] hover:bg-[#C96868] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            Delete
+        </a>
+    </div>
+</div>

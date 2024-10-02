@@ -1,68 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>{{ application }} - Product List</title>
+{% endblock meta %}
+
 {% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
+    <div class="p-2 mb-6 relative">
+        <div class="relative grid grid-cols-1 z-30 md:grid-cols-3 gap-8 mb-6">
+          {% include "card_info.html" with title='NPM' value=npm %}
+          {% include "card_info.html" with title='Name' value=name %}
+          {% include "card_info.html" with title='Class' value=class %}
+        </div>
+  {% if not product_entries %}
+  <div class="flex flex-col items-center justify-center min-h-[24rem] p-2">
+    <img src="{% static 'image/no_product.png' %}" alt="Sad face" class="w-40 h-auto mb-1" />
+    <p class="text-center text-gray-600 mt-1">Unable to find any products in {{ application }}.</p>
+  </div>
+  {% else %}
+  <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+    {% for product_entry in product_entries %}
+        {% include 'card_product.html' with product_entry=product_entry %}
+    {% endfor %}
+  </div>
+  {% endif %}
 
-<div style="text-align: center;">
-    <p style = "margin-bottom: 0;">{{  name  }}, you've arrived at</p>
-    <h1 style = "margin-top: 0;">{{  application  }}.</h1>
-</div>
-
-{% if not product_entries %}
-<div style="text-align: center;">
-    <br>
-    <p style = "margin-top: 5px; margin-bottom: 0;">Unable to find any products in {{ application }}.</p>
-    <p style = "margin-top: 0;">/ᐠ - ˕ -マ Ⳋ</p>
-</div>
-{% else %}
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product_entry in product_entries %}
-            <tr>
-                <td>{{ product_entry.name }}</td>
-                <td>{{ product_entry.price }}</td>
-                <td>{{ product_entry.description }}</td>
-                <td>{{ product_entry.quantity }}</td>
-                <td>
-                    {% for i in "12345" %}
-                        {% if forloop.counter <= product_entry.rating %}
-                            ★
-                        {% else %}
-                            ☆
-                        {% endif %}
-                    {% endfor %}
-                    ({{ product_entry.rating }})
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endif %}
-
-<div style="text-align: center; margin-top: 40px;">
-    <a href="{% url 'main:create_product_entry' %}">
-        <button style="padding: 10px 20px; font-size: 16px; margin-bottom: 20px;">Create New Product</button>
+  <div class="flex justify-center mt-10">
+    <a href="{% url 'main:create_product_entry' %}" class="bg-[#7EACB5] hover:bg-[#7EACB5] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Create New Product
     </a>
-</div>
+  </div>
 
-<div style="text-align: center; margin-bottom: 20px;">
-    <p style="margin-bottom: 0;"><small>  + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + ° .  ๑・° ⊹ . + </small></p>
-    <p style="margin-top: 0;"><small> created by yours truly, Meisya Najla Aqilah from {{ class }}</small></p>
-</div>
-
-<div style="text-align: right; margin-top: 0;">
-    <a href="{% url 'main:logout' %}">
-        <button style="padding: 10px 20px; font-size: 16px;">Logout</button>
-    </a>
-    <h5 style="margin-top: 0.5em;">last login: {{ last_login }}</h5>
+  <div class="text-center mt-8">
+    <p class="text-gray-600"><small>Last Login: {{ last_login }}</small></p>
+    <p class="text-gray-600"><small>created by yours truly, Meisya Najla Aqilah from {{ class }}</small></p>
+  </div>
 </div>
 {% endblock content %}

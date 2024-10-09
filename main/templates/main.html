@@ -175,6 +175,46 @@
     document.getElementById("closeModalBtn").addEventListener("click", hideModal);
 
     function addProductEntry() {
+        const nameInput = document.getElementById("name");
+        const descriptionInput = document.getElementById("description");
+        const priceInput = document.getElementById("price");
+        const quantityInput = document.getElementById("quantity");
+        const ratingInput = document.getElementById("rating");
+        
+        const errorElements = document.querySelectorAll('.error-message');
+        errorElements.forEach(el => el.remove());
+
+        const inputs = [
+            { field: nameInput, name: "Product Name" },
+            { field: descriptionInput, name: "Description" },
+            { field: priceInput, name: "Price" },
+            { field: quantityInput, name: "Quantity" },
+            { field: ratingInput, name: "Rating" }
+        ];
+
+        let isValid = true;
+
+        for (const input of inputs) {
+            if (!isValidInput(input.field.value)) {
+                const errorMessage = document.createElement('p');
+                errorMessage.textContent = `${input.name} contains invalid characters.`;
+                errorMessage.className = 'error-message text-red-500 text-sm';
+                input.field.parentNode.appendChild(errorMessage);
+                isValid = false;
+                input.field.value = "";
+            } else {
+                input.field.value = "";
+                
+            }
+        }
+
+        if (!isValid) {
+            return false;
+        }
+
+        nameInput.value = DOMPurify.sanitize(nameInput.value);
+        descriptionInput.value = DOMPurify.sanitize(descriptionInput.value);
+
         fetch("{% url 'main:add_product_entry_ajax' %}", {
         method: "POST",
         body: new FormData(document.querySelector('#productForm')),
@@ -191,6 +231,11 @@
         e.preventDefault();
         addProductEntry();
     })
+
+    function isValidInput(value) {
+        const regex = /<.*?>/;
+        return !regex.test(value);
+    }
     
 </script>
 {% endblock content %}

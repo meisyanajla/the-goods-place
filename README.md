@@ -32,6 +32,12 @@
   - [Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!](#jelaskan-perbedaan-antara-margin-border-dan-padding-serta-cara-untuk-mengimplementasikan-ketiga-hal-tersebut)
   - [Jelaskan konsep flex box dan grid layout beserta kegunaannya!](#jelaskan-konsep-flex-box-dan-grid-layout-beserta-kegunaannya)
   - [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step-3)
+- [Tugas 6: JavaScript dan AJAX](#tugas-6-javascript-dan-ajax)
+  - [Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!](#jelaskan-manfaat-dari-penggunaan-javascript-dalam-pengembangan-aplikasi-web)
+  - [Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?](#jelaskan-fungsi-dari-penggunaan-await-ketika-kita-menggunakan-fetch-apa-yang-akan-terjadi-jika-kita-tidak-menggunakan-await)
+  - [Mengapa kita perlu menggunakan decorator csrf\_exempt pada view yang akan digunakan untuk AJAX POST?](#mengapa-kita-perlu-menggunakan-decorator-csrf_exempt-pada-view-yang-akan-digunakan-untuk-ajax-post)
+  - [Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?](#pada-tutorial-pbp-minggu-ini-pembersihan-data-input-pengguna-dilakukan-di-belakang-backend-juga-mengapa-hal-tersebut-tidak-dilakukan-di-frontend-saja)
+  - [Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.](#jelaskan-bagaimana-cara-kamu-mengimplementasikan-checklist-di-atas-secara-step-by-step-4)
 
 
 # Tugas 2: Implementasi Model-View-Template (MVT) pada Django
@@ -182,3 +188,40 @@ Pertama, saya menambahkan script dengan source website tailwind (karena saya men
 4. **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.** <br />
 Pertama, pada templates, saya membuat berkas navbar.html yang berisikan styling navbar dengan fitur home, create, favorites, cart, user, dan logout button. Selanjutnya, pada main.html, create_product_entry.html, dan edit_product.html saya menambahkan {% include 'navbar.html' %} agar program dapat melakukan load navigation bar tersebut.
 
+# Tugas 6: JavaScript dan AJAX
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript memiliki beberapa penggunaan dalam pengembangan aplikasi website, seperti meningkatkan interaktivitas, mendukung pemrosesan asikron menggunakan AJAX (Asynchronous JavaScript and XML), serta mempermudah integrasi karena dapat dioperasikan dengan beberapa bahasa pemrograman.
+1. JavaScript memungkinkan para pengguna untuk menciptakan elemen interaktif seperti menu dropdown, slider, dan validasi formulir yang dapat berfungsi langsung di browser tanpa perlu memuat ulang halaman.
+2. Dengan menggunakan AJAX, JavaScript memungkinkan aplikasi web untuk mengirim dan menerima data dari server backend tanpa perlu memuat ulang halaman, yang pada gilirannya meningkatkan efisiensi dan pengalaman pengguna.
+3. JavaScript dapat diintegrasikan dengan berbagai bahasa pemrograman lain seperti PHP, Python, CSS, dan Java untuk mengembangkan aplikasi full-stack yang lebih dinamis dan lebih interaktif.
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Secara keseluruhan, penggunaan await saat menggunakan fetch() dapat mempermudah pengelolaan respons dari permintaan jaringan. Ini karena penggunannya memungkinkan kode untuk berjalan secara berurutan (di mana await akan menunggu hasil dari eksekusi fetch()). Dengan cara ini, penggunaan callback atau chaining dari Promise dapat dikurangi, sehingga kompleksitas berkurang dan alur logika menjadi lebih jelas.
+
+Jika kode tidak menggunakan await, fetch() akan mengembalikan sebuah Promise, yang perlu ditangani hasilnya secara manual dengan menggunakan method .then() serta .catch(). Tanpa await, eksekusi kode akan terus berlanjut tanpa menunggu respons dari server, yang dapat menyulitkan pengelolaan alur eksekusi dan penanganan kesalahan. Akibatnya, kode bisa menjadi lebih kompleks dan sulit dipahami.
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator csrf_exempt pada view yang digunakan untuk AJAX POST memiliki fungsi untuk menonaktifkan perlindungan CSRF sehingga permintaan AJAX dapat diproses tanpa memerlukan token CSRF. CSRF merupakan serangan yang mengeksploitasi sesi pengguna yang aktif untuk melakukan aksi yang tidak diinginkan atas nama pengguna tersebut. Tanpa menggunakan decorator csrf_exempt, permintaan AJAX yang tidak menyertakan token CSRF akan ditolak oleh Django, sehingga mengakibatkan kesalahan dan membuat permintaan tidak dapat diproses.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Selain dilakukan di fontend, pembersihan data input pengguna juga perlu dilakukan di backend karena dapat mencegah serangan keamanan, menjamin integritas data yang masuk ke sistem, serta memberikan fleksibilitas untuk mengubah aturan pembersihan tanpa mengganggu frontend.
+1. Apabila hanya mengandalkan pembersihan di frontend, program dapat menciptakan kerentanan terhadap serangan, sehingga memiliki backend yang kuat sangat penting untuk melindungi aplikasi dari potensi eksploitasi oleh pengguna yang tidak bertanggung jawab.
+2. Dengan melakukan pembersihan di backend, dapat dipastikan bahwa semua data yang masuk ke sistem adalah valid dan sesuai dengan standar yang ditetapkan, sehingga menjaga kualitas dan konsistensi data.
+3. Backend dapat dengan mudah diubah atau diperbarui tanpa mempengaruhi kode frontend, sehingga pembersihan di backend memungkinkan penyesuaian aturan tanpa mengganggu pengalaman pengguna di sisi frontend.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.
+Checklist tersebut diimplementasikan dengan cara-cara berikut.
+1. **Mengubah kode `cards` data product agar dapat mendukung AJAX `GET`** <br />
+Pertama, saya menghapus mood_entries serta ‘mood_entries’: mood_entries yang ada pada berkas views.py serta mengubah variabel data pada function show_json dan show_xml menjadi Product.objects.filter(user=request.user). Setelah itu, pada berkas main.html, saya kembali menghapus kode bagian block conditional untuk melakukan print product_entries dan menggantinya menjadi  id=“product_entry_cards".
+2. **Melakukan pengambilan data prodyct menggunakan AJAX `GET` serta pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.** <br />
+Selanjutnya, tetap dalam berkas main.html, saya membuat function getProductEntries() yang akan melakukan fetch() API pada data JSON serta membuat function refreshProductEntries() yang melakukan refresh data secara asinkronus. Jangan lupa untuk memanggil function tersebut agar dapat dijalankan.
+3. **Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan product.** <br />
+Setelah membuat add_product_entry_ajax, saya melakukan implementasi modal tailwind pada berkas main.html dengan menggunakan crudModal dan crudModalContent. Agar kedua class modal tersebut dapat diakses, pada bagian bawah berkas main.html, saya membuat function showModal serta hideModal. Kemudian, saya menambahkan button Create New Product Entry by AJAX dengan data-modal-targetnya adalah crudModal. 
+4. **Buatlah fungsi view baru untuk menambahkan product baru ke dalam basis data.** <br />
+Kemudian, pada berkas views.py, saya membuat fungsi baru bernama add_product_entry_ajax() dengan memanggil decorator @csrf_exempt dan @require_POST agar program hanya dapat diakses oleh pengguna yang melakukan login.
+5. **Buatlah path `/create-ajax/` yang mengarah ke fungsi view yang baru kamu buat.** <br />
+Tidak lupa, pada berkas urls.py, saya melakukan import add_product_entry_ajax dan menambahkannya pada urlpatterns.
+6. **Hubungkan form yang telah kamu buat di dalam modal kamu ke path `/create-ajax/`.** <br />
+Untuk menghubungkan form tersebut, saya membuat function baru bernama addProductEntry() yang pada mula-mula akan melakukan fetch dari add_product_entry_ajax dan menambahkan agar response mengarah pada refreshProductEntries() yang telah dibuat sebelumnya. Di bawahnya, saya menambahkan getElementByID lalu memanggil function addProductEntry() tersebut.
+7. **Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar product terbaru tanpa reload halaman utama secara keseluruhan.** <br />
+Refresh halaman utama secara asinkronus dapat dilakukan dengan pemanggilan function refreshProductEntries() yang telah dibuat sebelumnya. Terakhir, untuk menjaga agar website tidak mendapatkan error Cross Site Scriptig (XSS), saya akan melakukan import strip_tags pada views.py dengan menambahkan strip_tags() pada variabel di add_product_entry_ajax() yang data fieldnya merupakan Character atau Text. Lalu, pada forms.py saya membuat method clean_name() dan clean_description() yang akan menghapus jika terjadi error. Kemudian, pada berkas main.html saya akan menambahkan link dompurify seta membuat const name dan description dengan DOMPurify.sanitize(item.fields). Akibatnya, ketika melakukan input XSS, program tidak akan memunculkan alert box error lagi.

@@ -79,14 +79,14 @@
 </div>
 
 <script>
-    async function geProductEntries(){
+    async function getProductEntries(){
         return fetch("{% url 'main:show_json' %}").then((res) => res.json())
     }
 
     async function refreshProductEntries() {
         document.getElementById("product_entry_cards").innerHTML = "";
         document.getElementById("product_entry_cards").className = "";
-        const productEntries = await geProductEntries();
+        const productEntries = await getProductEntries();
         let htmlString = "";
         let classNameString = "";
 
